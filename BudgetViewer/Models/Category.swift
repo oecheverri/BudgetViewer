@@ -15,7 +15,12 @@ class CategoryGroup: Identifiable, ObservableObject, Decodable {
     let hidden: Bool
     let deleted: Bool
     
-    var categories: [Category]
+    var shouldShow: Bool {
+        get {
+            return !hidden && name != "Internal Master Category"
+        }
+    }
+    @Published var categories: [Category]
 
     enum CodingKeys: String, CodingKey {
         case id = "id"

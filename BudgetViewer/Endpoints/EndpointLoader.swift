@@ -72,11 +72,9 @@ struct EndpointLoader<ResultType: Decodable> {
             if let httpResponse = response as? HTTPURLResponse {
                 do {
                     if (200...299).contains(httpResponse.statusCode) {
-                        printResponse(data: data)
                         let parsedResponse = try decoder.decode(Response.self, from: data!)
                         handler(.Success(parsedResponse.data))
                     } else {
-                        printResponse(data: data)
                         let parsedResponse = try decoder.decode(YnabErrorResponse.self, from: data!)
                         handler(.Failed(parsedResponse.error))
                     }

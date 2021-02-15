@@ -8,8 +8,8 @@
 
 import SwiftUI
 
-struct BudgetLoader: View {
-    
+struct BudgetLoadingView: View {
+    @EnvironmentObject private var budgetViewer: BudgetViewer
     @State private var angle: Double = 0.0
     @State private var scale: CGFloat = 1.0
 
@@ -43,6 +43,6 @@ struct BudgetLoader: View {
 
 struct BudgetLoader_Previews: PreviewProvider {
     static var previews: some View {
-        BudgetLoader()
+        BudgetLoadingView()
     }
 }

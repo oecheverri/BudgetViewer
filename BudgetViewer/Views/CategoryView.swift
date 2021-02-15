@@ -14,14 +14,14 @@ struct CategoryHeader: View {
     
     var body: some View {
         LazyVGrid(
-            columns: [GridItem(.flexible(minimum: 50, maximum: 150)), GridItem(.fixed(100)), GridItem(.fixed(100))],
+            columns: [GridItem(.flexible(minimum: 50, maximum: 150)), GridItem(.flexible(minimum: 100, maximum: 500)), GridItem(.flexible(minimum: 100, maximum: 500))],
             content: {
                 Text(LocalizedStringKey(name))
                     .font(.headline)
-                    .lineLimit(2)
+                    .lineLimit(2)                    
                 Text(LocalizedStringKey("Activity"))
                     .font(.headline)
-                Text(LocalizedStringKey("Balance"))
+                Text(LocalizedStringKey("Available"))
                     .font(.headline)
         })
     }
@@ -33,7 +33,7 @@ struct CategoryView: View {
     
     var body: some View {
         LazyVGrid(
-            columns: [GridItem(.flexible(minimum: 50, maximum: 150)), GridItem(.fixed(100)), GridItem(.fixed(100))],
+            columns: [GridItem(.flexible(minimum: 50, maximum: 150)), GridItem(.flexible(minimum: 100, maximum: 500)), GridItem(.flexible(minimum: 100, maximum: 500))],
             content: {
                 Text(self.category.name)
                     .lineLimit(2)

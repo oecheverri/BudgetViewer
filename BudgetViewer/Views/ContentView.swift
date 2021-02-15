@@ -9,13 +9,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var budgetViewer: BudgetViewer
     var body: some View {
-        Text("Hello, World!")
+        if !self.budgetViewer.ready {
+            BudgetLoadingView()
+                .onAppear() {
+                    budgetViewer.prepare()
+                }
+        } else {
+            BudgetView(budget: budgetViewer.getBudget())
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(BudgetViewer())
     }
 }

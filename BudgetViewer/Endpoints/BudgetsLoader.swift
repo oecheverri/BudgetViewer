@@ -10,7 +10,7 @@ import Foundation
 
 struct BudgetsResponse: Decodable {
     let budgets: [Budget]
-    let default_budget: Budget
+    let default_budget: Budget?
 }
 struct BudgetResponse: Decodable {
     let budget: Budget

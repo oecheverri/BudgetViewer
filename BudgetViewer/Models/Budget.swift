@@ -67,10 +67,63 @@ class Budget: Identifiable, Decodable {
     var scheduled_transactions: [ScheduledTransaction]
     var scheduled_subtransactions: [ScheduledSubTransaction]
     
+    func getCurrentMonth() -> BudgetMonth? {
+        let calendar = Calendar.current
+        let currentMonth = calendar.component(.month, from: Date())
+        
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd"
+        for month in months {
+            if let monthDate = formatter.date(from: month.month) {
+                if calendar.component(.month, from: monthDate) == currentMonth {
+                    return month
+                }
+            }
+        }
+        return nil
+    }
+    
+    func getMonth(before month: BudgetMonth) -> BudgetMonth? {
+        let monthIndex = months.firstIndex{ $0.id == month.id }
+        
+        if let monthIndex = monthIndex {
+            let previousIndex = months.index(before: monthIndex)
+            
+            if previousIndex >= months.startIndex {
+                return months[previousIndex]
+            }
+        }
+        return nil
+    }
+    
+    func getMonth(after month: BudgetMonth) -> BudgetMonth? {
+        let monthIndex = months.firstIndex{ $0.id == month.id }
+        
+        if let monthIndex = monthIndex {
+            let nextIndex = months.index(after: monthIndex)
+            
+            if nextIndex <= months.endIndex {
+                return months[nextIndex]
+            }
+        }
+        return nil
+    }
+    
+    func configureFor(month: BudgetMonth) {
+        categories.removeAll(keepingCapacity: true)
+        _ = month.categories.map { category in
+            self.category_groups.first {
+                $0.id == category.category_group_id
+            }?.add(category: category)
+        }
+    }
 }
 
-struct BudgetMonth: Decodable {
-
+struct BudgetMonth: Identifiable, Decodable {
+    var id: String {
+        return month
+    }
     let month: String
     let note: String?
     let income: Int
