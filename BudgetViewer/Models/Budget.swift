@@ -86,7 +86,19 @@ class Budget: Identifiable, Decodable {
     
     func getMonth(before month: BudgetMonth) -> BudgetMonth? {
         let monthIndex = months.firstIndex{ $0.id == month.id }
-        
+        if let monthIndex = monthIndex {
+            let nextIndex = months.index(after: monthIndex)
+            
+            if nextIndex < months.endIndex {
+                return months[nextIndex]
+            }
+        }
+        return nil
+
+    }
+    
+    func getMonth(after month: BudgetMonth) -> BudgetMonth? {
+        let monthIndex = months.firstIndex{ $0.id == month.id }
         if let monthIndex = monthIndex {
             let previousIndex = months.index(before: monthIndex)
             
@@ -97,25 +109,20 @@ class Budget: Identifiable, Decodable {
         return nil
     }
     
-    func getMonth(after month: BudgetMonth) -> BudgetMonth? {
-        let monthIndex = months.firstIndex{ $0.id == month.id }
-        
-        if let monthIndex = monthIndex {
-            let nextIndex = months.index(after: monthIndex)
-            
-            if nextIndex <= months.endIndex {
-                return months[nextIndex]
-            }
-        }
-        return nil
-    }
-    
     func configureFor(month: BudgetMonth) {
-        categories.removeAll(keepingCapacity: true)
+        _ = self.category_groups.map {
+            $0.categories.removeAll()
+        }
         _ = month.categories.map { category in
             self.category_groups.first {
                 $0.id == category.category_group_id
             }?.add(category: category)
+        }
+        
+        _ = self.category_groups.map {
+            $0.categories.sort { left, right in
+                return left.id > right.id
+            }
         }
     }
 }

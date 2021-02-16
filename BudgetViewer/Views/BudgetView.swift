@@ -15,7 +15,45 @@ struct BudgetView: View {
         VStack {
             Text(budgetViewer.getBudget().name)
                 .font(.title)
-            Text(budgetViewer.getDisplayString(for: budgetViewer.configuredMonth!))
+            HStack {
+                
+                Button(action: {
+                    budgetViewer.goToPreviousMonth()
+                }) {
+                    Image(systemName: "chevron.left.circle.fill")
+                        .scaleEffect(CGSize(width: 1.5, height: 1.5))
+                }
+                .padding(.leading, 20)
+                .disabled(budget.getMonth(before: budgetViewer.configuredMonth!) == nil)
+                .accentColor(.green)
+                Spacer()
+                
+                Text(budgetViewer.getDisplayString(for: budgetViewer.configuredMonth!))
+                    .font(.title2)
+                
+                Spacer()
+                
+                Button(action: {
+                    budgetViewer.goToNextMonth()
+                }) {
+                    Image(systemName: "chevron.right.circle.fill")
+                        .scaleEffect(CGSize(width: 1.5, height: 1.5))
+                }
+                .padding(.trailing, 20)
+                .disabled(budget.getMonth(after: budgetViewer.configuredMonth!) == nil)
+                .accentColor(.green)
+                
+            }
+            
+            HStack {
+                Text(LocalizedStringKey("To be budgeted: "))
+                    .font(.headline)
+                Spacer()
+                Text(budget.currency_format.stringValue(of: budgetViewer.configuredMonth!.to_be_budgeted))
+                    .foregroundColor(budgetViewer.configuredMonth!.to_be_budgeted >= 0 ? .green : .red)
+                    .font(.headline)
+            }
+            .padding()
             List {
                 ForEach(budget.category_groups.indexed(), id: \.1.id) { groupIndex, categoryGroup in
                     if categoryGroup.shouldShow {
@@ -42,6 +80,9 @@ struct BudgetView_Previews: PreviewProvider {
     static func prepare() -> BudgetViewer {
         let budgetViewer = BudgetViewer()
         budgetViewer.budget = loadSampleBudget()
+        budgetViewer.configuredMonth = budgetViewer.budget!.getCurrentMonth()
+        budgetViewer.budget?.configureFor(month: budgetViewer.configuredMonth!)
+        
         budgetViewer.ready = true
         budgetViewer.error = false
         return budgetViewer

@@ -78,4 +78,18 @@ class BudgetViewer: ObservableObject {
         }
         return NSLocalizedString("Unknown Month", comment: "String for indicating that the budget month is unknown")
     }
+    
+    func goToPreviousMonth() {
+        if let month = budget!.getMonth(before: configuredMonth!) {
+            budget?.configureFor(month: month)
+            self.configuredMonth = month
+        }
+    }
+    
+    func goToNextMonth() {
+        if let month = budget?.getMonth(after: configuredMonth!) {
+            budget?.configureFor(month: month)
+            self.configuredMonth = month
+        }
+    }
 }
