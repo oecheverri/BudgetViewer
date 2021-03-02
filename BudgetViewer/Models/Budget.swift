@@ -10,46 +10,6 @@ import Foundation
 
 class Budget: Identifiable, Decodable {
     
-    enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case name = "name"
-        case first_month = "first_month"
-        case last_month = "last_month"
-        case date_format = "date_format"
-        case currency_format = "currency_format"
-        
-        case accounts = "accounts"
-        case months = "months"
-        case payees = "payees"
-        case category_groups = "category_groups"
-        case categories = "categories"
-        case transactions = "transactions"
-        case subtransactions = "subtransactions"
-        case scheduled_transactions = "scheduled_transactions"
-        case scheduled_subtransactions = "scheduled_subtransactions"
-    }
-    
-    required init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try values.decode(String.self, forKey: .id)
-        self.name = try values.decode(String.self, forKey: .name)
-        self.first_month = try values.decode(String.self, forKey: .first_month)
-        self.last_month = try values.decode(String.self, forKey: .last_month)
-        self.date_format = try values.decode(DateFormat.self, forKey: .date_format)
-        self.currency_format = try values.decode(Currency.self, forKey: .currency_format)
-        
-        self.accounts = try values.decodeOptional(type: [Account].self, forKey: .accounts, defaultingTo: [Account]())
-        self.months = try values.decodeOptional(type: [BudgetMonth].self, forKey: .months, defaultingTo: [BudgetMonth]())
-        self.payees = try values.decodeOptional(type: [Payee].self, forKey: .payees, defaultingTo: [Payee]())
-        self.category_groups = try values.decodeOptional(type: [CategoryGroup].self, forKey: .category_groups, defaultingTo: [CategoryGroup]())
-        self.categories = try values.decodeOptional(type: [Category].self, forKey: .categories, defaultingTo: [Category]())
-        self.transactions = try values.decodeOptional(type: [Transaction].self, forKey: .transactions, defaultingTo: [Transaction]())
-        self.subtransactions = try values.decodeOptional(type: [SubTransaction].self, forKey: .subtransactions, defaultingTo: [SubTransaction]())
-        self.scheduled_transactions = try values.decodeOptional(type: [ScheduledTransaction].self, forKey: .scheduled_transactions, defaultingTo: [ScheduledTransaction]())
-        self.scheduled_subtransactions = try values.decodeOptional(type: [ScheduledSubTransaction].self, forKey: .scheduled_subtransactions, defaultingTo: [ScheduledSubTransaction]())
-        
-    }
-    
     let id: String
     var name: String
     let first_month: String
@@ -57,15 +17,15 @@ class Budget: Identifiable, Decodable {
     let date_format: DateFormat
     var currency_format: Currency
     
-    var accounts: [Account]
-    var months: [BudgetMonth]
-    var payees: [Payee]
-    var category_groups: [CategoryGroup]
-    var categories: [Category]
-    var transactions: [Transaction]
-    var subtransactions: [SubTransaction]
-    var scheduled_transactions: [ScheduledTransaction]
-    var scheduled_subtransactions: [ScheduledSubTransaction]
+    @DecodableDefault.EmptyList var accounts: [Account]
+    @DecodableDefault.EmptyList var months: [BudgetMonth]
+    @DecodableDefault.EmptyList var payees: [Payee]
+    @DecodableDefault.EmptyList var category_groups: [CategoryGroup]
+    @DecodableDefault.EmptyList var categories: [Category]
+    @DecodableDefault.EmptyList var transactions: [Transaction]
+    @DecodableDefault.EmptyList var subtransactions: [SubTransaction]
+    @DecodableDefault.EmptyList var scheduled_transactions: [ScheduledTransaction]
+    @DecodableDefault.EmptyList var scheduled_subtransactions: [ScheduledSubTransaction]
     
     func getCurrentMonth() -> BudgetMonth? {
         let calendar = Calendar.current
@@ -132,13 +92,14 @@ struct BudgetMonth: Identifiable, Decodable {
         return month
     }
     let month: String
-    let note: String?
     let income: Int
     let budgeted: Int
     let activity: Int
     let to_be_budgeted: Int
-    let age_of_money: Int?
     let deleted: Bool
     let categories: [Category]
+    
+    @DecodableDefault.EmptyString var note: String
+    @DecodableDefault.Zero var age_of_money: Int
 
 }

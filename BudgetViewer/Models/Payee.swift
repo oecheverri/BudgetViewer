@@ -11,6 +11,6 @@ import Foundation
 struct Payee: Identifiable, Decodable {
     let id: String
     let name: String
-    let transfer_account_id: String?
+    @DecodableDefault.EmptyString var transfer_account_id: String
     let deleted: Bool
 }

@@ -28,31 +28,32 @@ struct SubTransaction: Identifiable, Decodable {
     
     let id: String
     let transaction_id: String
-    let amount: Int
-    let memo: String?
-    let payee_id: String?
-    let payee_name: String?
-    let category_id: String?
-    let category_name: String?
-    let transfer_account_id: String?
     let deleted: Bool
+    
+    @DecodableDefault.Zero var amount: Int
+    @DecodableDefault.EmptyString var memo: String
+    @DecodableDefault.EmptyString var payee_id: String
+    @DecodableDefault.EmptyString var payee_name: String
+    @DecodableDefault.EmptyString var category_id: String
+    @DecodableDefault.EmptyString var category_name: String
+    @DecodableDefault.EmptyString var transfer_account_id: String
+    
 }
 
 struct ScheduledTransaction: Identifiable, Decodable {
     let id: String
     let date_first: String
     let date_next: String
-    
     let frequency: Frequency
     let amount: Int
-    let memo: String?
-    
     let account_id: String
-    let payee_id: String?
-    let category_id: String?
-    let transfer_account_id: String?
-    
     let deleted: Bool
+    
+    @DecodableDefault.EmptyString var memo: String
+    @DecodableDefault.EmptyString var payee_id: String
+    @DecodableDefault.EmptyString var category_id: String
+    @DecodableDefault.EmptyString var transfer_account_id: String
+
 }
 
 
@@ -60,14 +61,17 @@ struct ScheduledSubTransaction: Identifiable, Decodable {
     let id: String
     let scheduled_transaction_id: String
     let amount: Int
-    let memo: String?
-    let payee_id: String?
-    let category_id: String?
-    let transfer_account_id: String?
     let deleted: Bool
+    
+    @DecodableDefault.EmptyString var memo: String
+    @DecodableDefault.EmptyString var payee_id: String
+    @DecodableDefault.EmptyString var category_id: String
+    @DecodableDefault.EmptyString var transfer_account_id: String
+    
 }
 
 struct Transaction: Identifiable, Decodable {
+    
     enum Status: String, Decodable {
         case cleared = "cleared"
         case uncleared = "uncleared"
@@ -77,19 +81,17 @@ struct Transaction: Identifiable, Decodable {
     let id: String
     let date: String
     let amount: Int
-    
-    let memo: String?
     let cleared: Status
-    
     let approved: Bool
-    
     let account_id: String
-    let payee_id: String?
-    let category_id: String?
-    let transfer_account_id: String?
-    let transfer_transaction_id: String?
-    let matched_transaction_id: String?
-    let import_id: String?
     let deleted: Bool
     
+    @DecodableDefault.EmptyString var memo: String
+    @DecodableDefault.EmptyString var payee_id: String
+    @DecodableDefault.EmptyString var category_id: String
+    @DecodableDefault.EmptyString var transfer_account_id: String
+    @DecodableDefault.EmptyString var transfer_transaction_id: String
+    @DecodableDefault.EmptyString var matched_transaction_id: String
+    @DecodableDefault.EmptyString var import_id: String
+
 }

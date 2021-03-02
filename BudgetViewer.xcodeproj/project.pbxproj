@@ -30,6 +30,7 @@
 		F69690D824CCBAF900FF1F63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F69690D724CCBAF900FF1F63 /* Assets.xcassets */; };
 		F69690DB24CCBAF900FF1F63 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F69690DA24CCBAF900FF1F63 /* Preview Assets.xcassets */; };
 		F69690E824CCBB9000FF1F63 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69690E724CCBB9000FF1F63 /* CategoryView.swift */; };
+		F6A50EFD25EAA97300F86398 /* DecodableDefaultSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A50EFC25EAA97300F86398 /* DecodableDefaultSource.swift */; };
 		F6BAA9C625A814E5007D9546 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BAA9C525A814E5007D9546 /* Account.swift */; };
 		F6BDD60425D768CF00FBAD76 /* BudgetViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BDD60325D768CF00FBAD76 /* BudgetViewer.swift */; };
 		F6BDD60925D99B6A00FBAD76 /* SampleBudget.json in Resources */ = {isa = PBXBuildFile; fileRef = F6BDD60825D99B6A00FBAD76 /* SampleBudget.json */; };
@@ -62,6 +63,7 @@
 		F69690DA24CCBAF900FF1F63 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F69690DF24CCBAF900FF1F63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F69690E724CCBB9000FF1F63 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
+		F6A50EFC25EAA97300F86398 /* DecodableDefaultSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableDefaultSource.swift; sourceTree = "<group>"; };
 		F6BAA9C525A814E5007D9546 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		F6BDD60325D768CF00FBAD76 /* BudgetViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetViewer.swift; sourceTree = "<group>"; };
 		F6BDD60825D99B6A00FBAD76 /* SampleBudget.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SampleBudget.json; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				F6642B1425A952EF00C6B0A2 /* Category.swift */,
 				F6ED954425AB50CA00AB5572 /* DateFormat.swift */,
 				F6427B2F25CEDB4E0032BD1D /* Helpers.swift */,
+				F6A50EFC25EAA97300F86398 /* DecodableDefaultSource.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				F609C9FC25C3979A00689D27 /* BudgetView.swift in Sources */,
 				F63F424125BE09BA00489BCC /* BudgetsLoader.swift in Sources */,
 				F6642B0F25A94FCF00C6B0A2 /* Budget.swift in Sources */,
+				F6A50EFD25EAA97300F86398 /* DecodableDefaultSource.swift in Sources */,
 				F673F22A25D734410033A295 /* BudgetViewerApp.swift in Sources */,
 				F63F424525BFCF7500489BCC /* AccountsLoader.swift in Sources */,
 				F69690E824CCBB9000FF1F63 /* CategoryView.swift in Sources */,

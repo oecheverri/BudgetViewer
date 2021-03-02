@@ -8,8 +8,6 @@
 
 import Foundation
 
-// [ checking, savings, cash, creditCard, lineOfCredit, otherAsset, otherLiability, payPal, merchantAccount, investmentAccount, mortgage ]
-
 struct Account: Identifiable, Decodable {
     enum AccountType: String, Decodable {
         case Chequing = "checking"
@@ -31,10 +29,11 @@ struct Account: Identifiable, Decodable {
     let type: AccountType
     let on_budget: Bool
     let closed: Bool
-    let note: String?
     let balance: Int
     let cleared_balance: Int
     let uncleared_balance: Int
     let transfer_payee_id: String
     let deleted: Bool
+    
+    @DecodableDefault.EmptyString var note: String
 }
